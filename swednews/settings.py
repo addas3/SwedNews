@@ -33,7 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['swed-news.herokuapp.com', 'localhost', 'swed-news-cf4db223443b.herokuapp.com', '8000-addas3-swednews-bbrdtkk2s1q.ws-eu105.gitpod.io']
 
-
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Application definition
 
@@ -43,12 +43,21 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'django_summernote',
     'cloudinary',
     'news',
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # Added this line
 ]
 
 ROOT_URLCONF = 'swednews.urls'
