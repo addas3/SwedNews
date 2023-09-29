@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Post, Comment
-from .forms import CommentForm
+from .models import Post, Comment, Newsletter
+from .forms import CommentForm, NewsletterSubscriptionForm
 
 from django.contrib import messages
 from django.http import JsonResponse
@@ -36,7 +36,8 @@ class PostDetail(View):
                 "comments": comments,
                 "commented": False,
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "user": request.user,
             },
         )
     
@@ -58,7 +59,7 @@ class PostDetail(View):
             comment.save()
         else:
             comment_form = CommentForm()
-
+    
         return render(
             request,
             "post_detail.html",
@@ -67,7 +68,7 @@ class PostDetail(View):
                 "comments": comments,
                 "commented": True,
                 "comment_form": comment_form,
-                "liked": liked
+                "liked": liked,
             },
         )
 
@@ -85,10 +86,9 @@ class PostLike(View):
 
 
 class CommentDelete(View):
-
     def post(self, request, comment_id):
         comment = get_object_or_404(Comment, id=comment_id)
-        if comment.user == request.user:
+        if comment.email == request.user.email:
             comment.delete()
             return JsonResponse({'message': 'Comment deleted successfully.'})
         else:
@@ -108,4 +108,4 @@ def subscribe(request):
             return redirect('home')
     # else:
     #     form = NewsletterSubscriptionForm()
-    # return render(request, 'your_template.html', {'form': form})
+    # return render(request, 'index.html', {'form': form})

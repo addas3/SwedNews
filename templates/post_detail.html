@@ -86,7 +86,7 @@
                     {{ comment.body | linebreaks }}
                     
                     <!-- Add a delete button for the comment's creator -->
-                    {% if comment.user == user %}
+                    {% if comment.email == user.email %}
                     <form id="delete-comment-form-{{ comment.id }}" method="POST" action="{% url 'delete_comment' comment.id %}" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger btn-sm delete-comment-btn" data-comment-id="{{ comment.id }}">Delete</button>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Subscribe to Swed News</title>
+</head>
+<body>
+    <h1>Subscribe to Swed News</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Subscribe</button>
+    </form>
+</body>
+</html>
