@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 {% load crispy_forms_tags %}
 
 <div class="masthead">
@@ -15,7 +16,7 @@
                 {% if "placeholder" in post.featured_image.url %}
                 <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
                 {% else %}
-                <img src=" {{ post.featured_image.url }}" width="100%">
+                <img src="{{ post.featured_image.url }}" width="100%">
                 {% endif %}
             </div>
         </div>
@@ -24,7 +25,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
+        <div class="col card mb-4 mt-3 left top">
             <div class="card-body">
                 <!-- The post content goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
@@ -32,7 +33,6 @@
                     {{ post.content | safe }}
                 </p>
                 <div class="row">
-
                     <div class="col-1">
                         <strong>
                             {% if user.is_authenticated %}
@@ -47,8 +47,8 @@
                             {% else %}
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
                             {% endif %}
-                        <!-- The number of likes goes before the closing strong tag -->
-                        <span class="text-secondary">{{ post.number_of_likes }} </span>
+                            <!-- The number of likes goes before the closing strong tag -->
+                            <span class="text-secondary">{{ post.number_of_likes }} </span>
                         </strong>
                     </div>
                     <div class="col-1">
@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="col-md-8 card mb-4 mt-3">
             <h3>Comments:</h3>
             <div class="card-body">
                 <!-- We want a for loop inside the empty control tags to iterate through each comment in comments -->
@@ -77,19 +77,27 @@
                     <p class="font-weight-bold">
                         <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
                         {{ comment.name }}
-                        <span class=" text-muted font-weight-normal">
+                        <span class="text-muted font-weight-normal">
                             <!-- The comment's created date goes here -->
                             {{ comment.created_on }}
                         </span> wrote:
                     </p>
                     <!-- The body of the comment goes before the | -->
                     {{ comment.body | linebreaks }}
+                    
+                    <!-- Add a delete button for the comment's creator -->
+                    {% if comment.user == user %}
+                    <form id="delete-comment-form-{{ comment.id }}" method="POST" action="{% url 'delete_comment' comment.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm delete-comment-btn" data-comment-id="{{ comment.id }}">Delete</button>
+                    </form>
+                    {% endif %}
                 </div>
                 <!-- Our for loop ends here -->
                 {% endfor %}
             </div>
         </div>
-        <div class="col-md-4 card mb-4  mt-3 ">
+        <div class="col-md-4 card mb-4 mt-3">
             <div class="card-body">
                 <!-- For later -->
                 {% if commented %}
@@ -112,5 +120,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Add this script to your template to handle comment deletion
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButtons = document.querySelectorAll('.delete-comment-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const commentId = this.getAttribute('data-comment-id');
+                const form = document.getElementById(`delete-comment-form-${commentId}`);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Comment deleted successfully.') {
+                        // Remove the deleted comment from the page
+                        form.parentNode.remove();
+                    }
+                    alert(data.message);
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>
 
 {% endblock content %}

@@ -60,6 +60,18 @@
         <p>Your source for the latest news and updates about Sweden.</p>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <main class="flex-shrink-0 main-bg">
         {% block content %}
@@ -71,10 +83,10 @@
 <footer class="footer mt-auto py-5 dark-bg">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <h4 class="text-white">About Swed News</h4>
                 <p class="text-muted">Swed News is your go-to source for the latest news and updates about Sweden. Stay informed about the happenings in this beautiful country, engage in discussions, and share your thoughts on various topics. Our platform is where you can post, read, and comment on news stories related to Sweden, creating a vibrant community of individuals passionate about all things Swedish.</p>
-            </div>
+            </div> -->
             <div class="col-md-4">
                 <h4 class="text-white">Quick Links</h4>
                 <ul class="list-unstyled">
@@ -95,8 +107,28 @@
             </div>
         </div>
     </div>
-</footer>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form method="post" action="{% url 'subscribe' %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    setTimeout(function () {
+        let messages = document.getElementById('msg');
+        let alert = new bootstrap.Alert(messages);
+        alert.close();
+    }, 2500);
+</script>
 </body>
 
 </html>

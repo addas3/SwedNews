@@ -41,9 +41,18 @@ class Comment(models.Model):
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False)  # Add this line
 
     class Meta:
         ordering = ["created_on"]
 
     def __str__(self):
         return f"Comment {self.body} by {self.name}"
+
+
+class Newsletter(models.Model):
+    email = models.EmailField(unique=True)
+    is_subscribed = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.email

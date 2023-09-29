@@ -6,3 +6,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+
+
+class NewsletterSubscriptionForm(forms.Form):
+    email = forms.EmailField(label='Subscribe to our newsletter', required=True)

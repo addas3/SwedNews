@@ -1,8 +1,12 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Post
+from .models import Post, Comment
 from .forms import CommentForm
+
+from django.contrib import messages
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -78,3 +82,30 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class CommentDelete(View):
+
+    def post(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        if comment.user == request.user:
+            comment.delete()
+            return JsonResponse({'message': 'Comment deleted successfully.'})
+        else:
+            return JsonResponse({'message': 'You are not authorized to delete this comment.'}, status=403)
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = NewsletterSubscriptionForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            if not Newsletter.objects.filter(email=email).exists():
+                Newsletter.objects.create(email=email)
+                messages.success(request, 'You have subscribed successfully!')
+            else:
+                messages.warning(request, 'You are already subscribed!')
+            return redirect('home')
+    # else:
+    #     form = NewsletterSubscriptionForm()
+    # return render(request, 'your_template.html', {'form': form})
