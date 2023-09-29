@@ -80,15 +80,18 @@
     </main>
 
    <!-- Footer -->
-<footer class="footer mt-auto py-5 dark-bg">
+   <footer class="footer mt-auto py-5 dark-bg">
     <div class="container">
         <div class="row">
-            <!-- <div class="col-md-4">
-                <h4 class="text-white">About Swed News</h4>
-                <p class="text-muted">Swed News is your go-to source for the latest news and updates about Sweden. Stay informed about the happenings in this beautiful country, engage in discussions, and share your thoughts on various topics. Our platform is where you can post, read, and comment on news stories related to Sweden, creating a vibrant community of individuals passionate about all things Swedish.</p>
-            </div> -->
             <div class="col-md-4">
-                <h4 class="text-white">Quick Links</h4>
+                <h4>About Swed News</h4>
+                <p>Swed News is your go-to source for the latest news and updates about Sweden. Stay informed about
+                    the happenings in this beautiful country, engage in discussions, and share your thoughts on
+                    various topics. Our platform is where you can post, read, and comment on news stories related
+                    to Sweden, creating a vibrant community of individuals passionate about all things Swedish.</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Quick Links</h4>
                 <ul class="list-unstyled">
                     <li><a href="{% url 'home' %}" class="footer-link">Home</a></li>
                     <li><a href="#" class="footer-link">About Us</a></li>
@@ -97,20 +100,25 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h4 class="text-white">Follow Us</h4>
+                <h4>Follow Us</h4>
                 <ul class="list-unstyled">
-                    <li><a href="https://www.facebook.com/" class="footer-icon-link"><i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="https://twitter.com/" class="footer-icon-link"><i class="fab fa-twitter-square"></i></a></li>
-                    <li><a href="https://www.instagram.com/" class="footer-icon-link"><i class="fab fa-instagram-square"></i></a></li>
-                    <li><a href="https://www.youtube.com/" class="footer-icon-link"><i class="fab fa-youtube-square"></i></a></li>
+                    <li><a href="https://www.facebook.com/" class="footer-icon-link"><i
+                                class="fab fa-facebook-square"></i></a></li>
+                    <li><a href="https://twitter.com/" class="footer-icon-link"><i
+                                class="fab fa-twitter-square"></i></a></li>
+                    <li><a href="https://www.instagram.com/" class="footer-icon-link"><i
+                                class="fab fa-instagram-square"></i></a></li>
+                    <li><a href="https://www.youtube.com/" class="footer-icon-link"><i
+                                class="fab fa-youtube-square"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
+                <!-- Message encouraging subscription (Moved above the form) -->
+                <p class="subscription-message">Subscribe to our newsletter to get the latest news and updates about Sweden delivered right to your inbox!</p>
                 <form method="post" action="{% url 'subscribe' %}">
                     {% csrf_token %}
                     <div class="input-group">
