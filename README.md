@@ -1,110 +1,160 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Swed News
 
-Welcome addas3,
+Swedish News Hub is an online platform that offers the latest news updates from Sweden. It allows users to read news articles and actively engage with the content through comments and likes.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+Additionally, the Code Institute hosts various Python-based projects on their mock terminal platform on Heroku, providing a diverse range of educational and interactive experiences.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+ [View the live site here](https://swed-news-cf4db223443b.herokuapp.com/)
 
-## Gitpod Reminders
+![Mockup](docs/readme_images/mockup.jpg)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## How to play
 
-`python3 -m http.server`
+At the beginning of the game, a welcome message is displayed along with the rules of the game to the player. The game then selects a random word from a pre-defined list of words. The current status of the hangman, the number of guesses remaining, and the guessed letters are displayed (which is empty at this point). The player is prompted to guess a letter. If the guessed letter is correct, the game reveals the location(s) of the guessed letter in the word. If the guessed letter is incorrect, the game draws the next part of the hangman and reduces the number of guesses remaining. Steps 4-6 are repeated until the word is guessed or the player runs out of guesses. If the word is guessed before the player runs out of guesses, the game displays a "You won!" message and reveals the word. If the player runs out of guesses before the word is guessed, the game displays a "You lost!" message and reveals the word.
 
-A blue button should appear to click: _Make Public_,
+## Features 
 
-Another blue button should appear to click: _Open Browser_.
+### Existing Features
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+* Welcome message and game rules are displayed at the start of the game.
+  * A random word is selected from a pre-defined list of words.
+  * The player is prompted to guess a letter.
+  * The player is prompted to guess a letter.
 
-A blue button should appear to click: _Make Public_,
+![welcome message](docs/readme_images/welcome_message.jpg)
 
-Another blue button should appear to click: _Open Browser_.
+* If the guessed letter is correct.
+  * The game reveals the location(s) of the guessed letter in the word.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+![correct guess](docs/readme_images/correct_guess.jpg)
 
-To log into the Heroku toolbelt CLI:
+* If the guessed letter is incorrect. 
+  * The game draws the next part of the hangman and reduces the number of guesses remaining.
+  * The game displays the hangman's current state based on the number of incorrect guesses made by the player.
+  * The game continues until the word is guessed or the player runs out of guesses.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+![incorrect guess](docs/readme_images/incorrect_guess.jpg)
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+* If the word is guessed before the player runs out of guesses. 
+  * The game displays a "WOOW Congratulations! You guessed the word!" message and reveals the word.
 
-------
+![win message](docs/readme_images/win_message.jpg)
 
-## Release History
+* If the player runs out of guesses before the word is guessed.
+  * The game displays a "Sorry you lost!" message and reveals the word.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+![lost message](docs/readme_images/lost_message.jpg)
 
-**September 20 2023:** Update Python version to 3.9.17.
+* The game asks if the player wants to try again.
+  * If y the game start from the begining
+  * if n the game stops and exit
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+![try again](docs/readme_images/try_again.jpg)
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Future Features 
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+* Allow player to select categories
+* Give more chances for the player
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+## Technologies
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+* Python
+    * The Website was animated using custom Python in an external file.    
+* GitHub
+    * Source code is hosted on GitHub and delpoyed using Git Pages.
+* Git 
+    * Used to commit and push code during the development opf the Website
+* Heroku
+    * Source code is hosted on Heroku and delpoyed.
+* Tinyjpg
+    * https://tinyjpg.com/ was used to reduce the size of the images used throughout the website
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+## Data Model 
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+The data model for the Hangman game consists of several attributes and methods. The Hangman class has a constructor that takes a list of words as a parameter and initializes several attributes, including the word to be guessed, the list of guessed letters, the number of allowed guesses, the number of incorrect guesses made by the player, the display word with underscores representing unguessed letters, and a list of art representations of the hangman as it is being drawn.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+The class has methods to introduce the game to the user, choose a word at random from the list of possible words, and get a guess from the player. The guess method updates the display_word and guesses attributes based on the guess. The play method calls the intro, word_choose, and guess methods until the game is won or lost.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+Overall, the data model represents a simple game with a clear objective: guessing a word before the hangman is fully drawn. The game's state is updated based on the player's input, and the game ends when the player has used all their guesses or correctly guessed the word. The class's attributes and methods encapsulate the game's state and behavior, making it easy to reuse and extend the code.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+* Below it shows my Flow Chart for the Hangman Game
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+![flow chart](docs/readme_images/flow_chart.jpeg)
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+### Testing
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+I have manually tested this game by doing the following:
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+* I ran the game by running the script in my local terminal and the Code Institute Heroku terminal.
+* The game displayed a welcome message, rules of the game, and a hint to guess a fruit.
+* I was prompted to guess a letter.
+* I guessed a letter that was in the word.
+* The game displayed the updated word with the correct letters filled in and the number of guesses left.
+* I repeated steps 3-5 until I guessed the entire word or ran out of guesses.
+* If I guessed the entire word, the game displayed a congratulations message.
+* If I ran out of guesses, the game displayed a sorry message with the correct word.
+* I was prompted if I wanted to play again.
+* If I chose to play again, the game started over from the beginning with a new word to guess.
+* I repeated steps 3-10 until you were finished playing.
 
-------
+I tested several situations:
 
-## FAQ about the uptime script
+* I wrote number and I got error message as expected.
 
-**Why have you added this script?**
+![number error](docs/testing/number_error.jpg)
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+* I wrote multiple letters and also I got error as expected.
 
-**How will this affect me?**
+![multiple letters error](docs/testing/multiple_letters_error.jpg)
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+* I wrote capital letter and got answer as expected.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+![writting capital letter](docs/testing/writting_capital_letter.jpg)
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
 
-**So….?**
+Overall, I manually tested the game by playing it multiple times and verifying that it functioned correctly according to the rules and gameplay.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+### Bugs
 
-**Can I opt out?**
+### Solved Bugs
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+* Player was able to put numbers also for guessing the word. I fixed it by adding guess.isalpha() so incase the player input number will get error saying "Invalid input. Please enter a letter." 
+* The game was not running and I discover it was because my indication for game.play() was not right. I fixed it and it started working
+* When the game ends and I reset the game and I was getting the welcome message however it was showing me already that I am lost. I fix it by adding def reset_variables.
+* When player write letter in capital letter it was not working and player was able to write multiple letters without issue. I fix it by adding .lower() to the guess variabile and adding "or len(guess) > 1" for the "if not guess.isalpha()"
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+### Remaining Bugs
 
-**Anything more?**
+* No bugs remaining
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+### Validator Testing
 
----
+* PEP8
+  * Two errors were returned from pep8ci.herokuapp.com for line too long will fix it in the new release.
 
-Happy coding!
+![pep8 test](docs/testing/pep8_test.jpg)
+
+### Deployment
+
+This project was deoplyed using Code Institut's mock terminal for Heroku
+
+* Steps for deployment:
+    * Fork or clone this repository
+    * Create a new Heroku app
+    * Set the buildbacks to Python and NodeJS in that order
+    * Link the Heroku app to the repository
+    * Click on Deploy
+
+### Credits
+
+* Code Institute for the deployment terminal.
+* Code Institute Love Sandwishes Project for inspiration and practice.
+* Code Institute Battleship Game Project for inspiration and practice.
+* Slack groups it gives me good inspiration.  
+
+
+
+
+
+
+
