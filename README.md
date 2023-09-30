@@ -8,48 +8,89 @@ Additionally, the Code Institute hosts various Python-based projects on their mo
 
 ![Mockup](docs/readme_images/mockup.jpg)
 
-## How to play
+## Description
 
-At the beginning of the game, a welcome message is displayed along with the rules of the game to the player. The game then selects a random word from a pre-defined list of words. The current status of the hangman, the number of guesses remaining, and the guessed letters are displayed (which is empty at this point). The player is prompted to guess a letter. If the guessed letter is correct, the game reveals the location(s) of the guessed letter in the word. If the guessed letter is incorrect, the game draws the next part of the hangman and reduces the number of guesses remaining. Steps 4-6 are repeated until the word is guessed or the player runs out of guesses. If the word is guessed before the player runs out of guesses, the game displays a "You won!" message and reveals the word. If the player runs out of guesses before the word is guessed, the game displays a "You lost!" message and reveals the word.
+Swed News, is a go-to platform for comprehensive insights on Sweden. The user can explore a diverse range of topics, personalize news feed, and engage with a vibrant community. Trust in our accurate and unbiased reporting to enhance understanding of Sweden. Users have the option to register for an account, and anyone is welcome to subscribe to our email newsletter.
 
 ## Features 
 
-### Existing Features
+### Navigation Section
 
-* Welcome message and game rules are displayed at the start of the game.
-  * A random word is selected from a pre-defined list of words.
-  * The player is prompted to guess a letter.
-  * The player is prompted to guess a letter.
+* The navigation here is visible to all users before the user sign in, it includes:
+  * Home  
+  * Register
+  * Login
 
-![welcome message](docs/readme_images/welcome_message.jpg)
+![Nav Before](docs/readme_images/nav-before.jpg)
 
-* If the guessed letter is correct.
-  * The game reveals the location(s) of the guessed letter in the word.
+* The navigation here is exclusively visible to logged-in users and includes:
+  * Home  
+  * Logout
 
-![correct guess](docs/readme_images/correct_guess.jpg)
+![Nav After](docs/readme_images/nav-after.jpg)
 
-* If the guessed letter is incorrect. 
-  * The game draws the next part of the hangman and reduces the number of guesses remaining.
-  * The game displays the hangman's current state based on the number of incorrect guesses made by the player.
-  * The game continues until the word is guessed or the player runs out of guesses.
+* Home
+  * This will lead to the landing page containing all the essential information.
 
-![incorrect guess](docs/readme_images/incorrect_guess.jpg)
+![Home](docs/readme_images/home.jpg)
 
-* If the word is guessed before the player runs out of guesses. 
-  * The game displays a "WOOW Congratulations! You guessed the word!" message and reveals the word.
+* Register
+  * This will redirect the user to the registration page where they can input all the necessary information to create an account.
 
-![win message](docs/readme_images/win_message.jpg)
+![Register](docs/readme_images/register.jpg)
 
-* If the player runs out of guesses before the word is guessed.
-  * The game displays a "Sorry you lost!" message and reveals the word.
+* Login
+  * This will direct the user to the login page, where they can enter their details to access the functions available for logged-in users.
 
-![lost message](docs/readme_images/lost_message.jpg)
+![Login](docs/readme_images/login.jpg)
 
-* The game asks if the player wants to try again.
-  * If y the game start from the begining
-  * if n the game stops and exit
+* Logout
+  * This will direct the user to the logout page, allowing them to log out from the system.
+  
+![Logout](docs/readme_images/logout.jpg)
 
-![try again](docs/readme_images/try_again.jpg)
+### Message Notification
+
+* Message notifications deliver important information to users when they take significant actions. For instance, these messages will appear briefly for 2.5 seconds few exampels:
+  * Signing in or out  
+  * Entering their email to subscribe
+  * Entering their email to subscribe while they already did
+
+![Sign In](docs/readme_images/sign-in.jpg)
+
+![Sign Out](docs/readme_images/sign-out.jpg)
+
+![Already Subscribed](docs/readme_images/already-subscribed.jpg)
+
+### Newsletter Subscription
+
+* Newsletter subscription enables users to enter their email address to subscribe and receive the latest news updates from Swed News.
+  
+![Newsletter](docs/readme_images/newsletter.jpg)
+
+### Footer
+
+* The footer contains a variety of information which include:
+  * Quick links  
+  * Newsletter subscription
+  * Social media links
+  * Contact email
+  
+![Footer](docs/readme_images/footer.jpg)
+
+### Posting and Liking Comments
+
+* Below, there are two types of users: one who is signed in, allowing them to post, like comments, and interact with posts, while the other type can only read the posts, but they can see the number of likes each post has.
+  
+![Post 1](docs/readme_images/post-1.jpg)
+
+![Post 2](docs/readme_images/post-2.jpg)
+
+* Signed-in users can post comments, but their comments require approval from the admin before they are published.
+
+![Approval](docs/readme_images/approval.jpg)
+
+
 
 ### Future Features 
 
