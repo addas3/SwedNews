@@ -249,7 +249,7 @@ a. Page Load Speed: Evaluate the website's performance in terms of page load spe
 b. Content Loading: Check that content, especially images and videos, loads quickly and without delay. Optimize media files if necessary.
 
 
-I tested several situations:
+### I tested several situations:
 
 * I keep the sign up form empty and I pressed perocced and it didn't go throug as expected.
 
@@ -266,42 +266,103 @@ I tested several situations:
 
 Overall, I conducted manual testing on the website, focusing primarily on the registration and sign-in processes. During the testing phase, I carefully observed how the system behaved when a user attempted to register and sign in. I verified that error handling mechanisms were functioning as expected
 
-### Bugs
+
+### Validator Testing
+
+* PEP8
+  * Minor errors were returned from pep8ci.herokuapp.com for line too long will fix it in the new release.
+
+- HTML
+  - No errors were returned when passing through the official [W3C validator](https://validator.w3.org) only few warnings was found will fix them in the next release
+
+![Home](docs/testing/html-validator.jpg)
+
+
+
+- CSS
+  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org)
+
+![CSS Validator Results](docs/testing/css-validator.jpg)
+
+### Lighthouse Testing
+
+![Home](docs/testing/home-lighthouse.jpg)
+
+![Register](docs/testing/signup-lighthouse.jpg)
+
+![Login](docs/testing/login-lighthouse.jpg)
+## Bugs
 
 ### Solved Bugs
 
-* Player was able to put numbers also for guessing the word. I fixed it by adding guess.isalpha() so incase the player input number will get error saying "Invalid input. Please enter a letter." 
-* The game was not running and I discover it was because my indication for game.play() was not right. I fixed it and it started working
-* When the game ends and I reset the game and I was getting the welcome message however it was showing me already that I am lost. I fix it by adding def reset_variables.
-* When player write letter in capital letter it was not working and player was able to write multiple letters without issue. I fix it by adding .lower() to the guess variabile and adding "or len(guess) > 1" for the "if not guess.isalpha()"
+### Bug 1: Template Directory Configuration
+* Description: I faced a bug where Django couldn't find my templates due to misconfiguration of the template directory.
+
+* How I Fixed It: I addressed this issue by reviewing my settings.py file and ensuring that the TEMPLATES configuration pointed to the correct directory for my templates, which was defined as TEMPLATES_DIR. I confirmed that the APP_DIRS option was set to True so that Django searched for templates in app-specific directories as well.
+
+### Bug 2: CSRF Token Missing in Forms
+
+* Description: I encountered a bug where form submissions failed because the CSRF token was missing or incorrect.
+
+* How I Fixed It: To fix this issue, I made sure that I included the {% csrf_token %} template tag within my forms in the templates. For instance, in my post_detail.html, I ensured that the comment form contained the CSRF token.
+
+### Bug 3: Missing Static Files
+
+* Description: Sometimes, web pages may not load correctly because static files like CSS and JavaScript are not being served by Django.
+
+* How I Fixed It: To resolve this issue, I first ensured that I had set up the STATIC_URL and STATICFILES_DIRS correctly in my settings.py file. Then, I ran the following Django management command to collect and serve static files.
+
+
+
 
 ### Remaining Bugs
 
 * No bugs remaining
 
-### Validator Testing
 
-* PEP8
-  * Two errors were returned from pep8ci.herokuapp.com for line too long will fix it in the new release.
+## Deployment
 
-![pep8 test](docs/testing/pep8_test.jpg)
+The project was successfully deployed to Heroku by following these steps:
 
-### Deployment
+1.	Start by accessing Heroku and selecting "New" to initiate the creation of a new app.
 
-This project was deoplyed using Code Institut's mock terminal for Heroku
+2.	After specifying the app's name and region, click "Create app" to proceed.
 
-* Steps for deployment:
-    * Fork or clone this repository
-    * Create a new Heroku app
-    * Set the buildbacks to Python and NodeJS in that order
-    * Link the Heroku app to the repository
-    * Click on Deploy
+3.	Navigate to the "Settings" tab and locate "Config Vars." Here, you will need to input the following values:
 
-### Credits
+* SECRET_KEY: (Insert your secret key)
+* DATABASE_URL: (Enter the database URL obtained from ElephantSQL)
+* CLOUDINARY_URL: (Provide the Cloudinary API URL)
+* PORT: 8000
+* API_KEY: (Retrieve an API key from TMDB)
+
+4.	Exit the "Settings" section and head to the "Deploy" section. Scroll down and select "GitHub" as the Deployment Method. Once GitHub is selected, locate your repository and establish a connection with Heroku.
+
+5.	Continue scrolling down to the "Manual Deploy" section. Ensure that the "main" branch is chosen, and then click "Deploy Branch."
+
+6.	You can access the deployed app by following this link [Swed News](https://swed-news-cf4db223443b.herokuapp.com/).
+
+The project should now be live on Heroku.
+
+
+
+## Credits
+
+### Media
+
+* [Post Image 1](https://www.dailyscandinavian.com/6-reasons-why-swedish-school-education-is-better/)
+* [Post Image 2](https://visitukraine.today/blog/1099/cost-of-living-and-prices-in-sweden-apartment-rent-food-transport)
+* [Post Image 3](https://www.businessregiongoteborg.se/naringslivsutveckling/hallbar-utveckling/gothenburg-green-city-zone/mobilitets-och-godshubbar)
+* [Post Image 4](https://www.multisoft.se/om-oss/)
+* [Post Image 5](https://www.greenesa.com/news/renewable-energy-companies-in-sweden)
+* [Post Image 6](https://commons.wikimedia.org/wiki/File:Swedish_landscape_-_farm_in_N%C3%A4ssja.JPG)
+    * All images were taken from above websites. 
+
+### Code
 
 * Code Institute for the deployment terminal.
-* Code Institute Love Sandwishes Project for inspiration and practice.
-* Code Institute Battleship Game Project for inspiration and practice.
+* Code Institute To-Do app Project for inspiration and practice.
+* Code Institute Codestar Blog Project for inspiration and practice.
 * Slack groups it gives me good inspiration.  
 
 
