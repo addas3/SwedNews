@@ -106,6 +106,24 @@ Swed News, is a go-to platform for comprehensive insights on Sweden. The user ca
 * Allow User to be able to edit their post.
 * Creating different category for news.
 
+## Agile Planning
+
+At the beginning of the project, I started by brainstorming user stories. This involved gathering ideas and requirements, along with potential users. User stories are essentially short descriptions of a feature or functionality from the user's perspective. By brainstorming and defining these stories early on, I was able to:
+
+1.	Understand User Needs: Brainstorming helped me gain a deep understanding of what the users really needed and expected from the project.
+
+2.	Prioritize Features: I could prioritize features based on their importance to users, ensuring that the most crucial functionalities were addressed first.
+
+3.	Plan Iterations: User stories became the foundation for planning project iterations or sprints, making it easier to break down the work into manageable chunks.
+
+4.	Align Stakeholders: It facilitated discussions, ensuring everyone was on the same page regarding project goals.
+
+5.	Stay Agile: Brainstorming user stories is a fundamental part of Agile methodology, enabling flexibility and adaptability as the project progresses.
+
+By starting with this brainstorming process, I set a solid foundation for the project and ensured that it remained user-centered throughout its development.
+You can view the link to my Agile project on GitHub by clicking here [Swed News Stories](https://github.com/users/addas3/projects/3/views/1). This repository contains the project's user stories, planning, and progress throughout its development. Feel free to explore and get a better understanding of how Agile planning was implemented in the project.
+
+
 ## Technologies
 
 * HTML
