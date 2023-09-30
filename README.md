@@ -90,15 +90,28 @@ Swed News, is a go-to platform for comprehensive insights on Sweden. The user ca
 
 ![Approval](docs/readme_images/approval.jpg)
 
+### Django Admin Panel
+
+* Within the Admin Panel, as an admin or superuser, I possess comprehensive control over CRUD operations. This means I have the authority to perform the following actions on various entities:
+  * Posts: I can view, create, edit, and delete posts. 
+  * Comments: I can view, approve, and delete comments.
+  * Profiles: I can oversee user profiles, including making changes or deletions.
+  
+  
+![Admin](docs/readme_images/admin.jpg)
 
 
 ### Future Features 
 
-* Allow player to select categories
-* Give more chances for the player
+* Allow User to be able to edit their post.
+* Creating different category for news.
 
 ## Technologies
 
+* HTML
+    * The structure of the Website was developed using HTML as the main language.   
+* CSS
+    * The Website was styled using custom CSS in an external file.   
 * Python
     * The Website was animated using custom Python in an external file.    
 * GitHub
@@ -109,51 +122,149 @@ Swed News, is a go-to platform for comprehensive insights on Sweden. The user ca
     * Source code is hosted on Heroku and delpoyed.
 * Tinyjpg
     * https://tinyjpg.com/ was used to reduce the size of the images used throughout the website
+* Bootstrap
+    * It was employed to design the website, enhance its responsiveness, and introduce interactivity.   
+* PostgreSQL
+    * The database was accessed via Heroku. 
+* Gunicorn 
+    * Played the role of hosting our static files and media content.
+* Cloudinary 
+    * It was employed to design the website, enhance its responsiveness, and introduce interactivity.   
+* Psycopg2 
+    * Acted as a connector between Python and PostgreSQL databases.  
+* Summernote  
+    * Was used as a rich text editor within the application.
+* Allauth  
+    * Provided the necessary functionalities for authentication, registration, and account management.  
+* Crispy Forms 
+    * Contributed to the aesthetic styling of our forms.       
 
 ## Data Model 
 
-The data model for the Hangman game consists of several attributes and methods. The Hangman class has a constructor that takes a list of words as a parameter and initializes several attributes, including the word to be guessed, the list of guessed letters, the number of allowed guesses, the number of incorrect guesses made by the player, the display word with underscores representing unguessed letters, and a list of art representations of the hangman as it is being drawn.
+Post Model:
 
-The class has methods to introduce the game to the user, choose a word at random from the list of possible words, and get a guess from the player. The guess method updates the display_word and guesses attributes based on the guess. The play method calls the intro, word_choose, and guess methods until the game is won or lost.
+Fields:
 
-Overall, the data model represents a simple game with a clear objective: guessing a word before the hangman is fully drawn. The game's state is updated based on the player's input, and the game ends when the player has used all their guesses or correctly guessed the word. The class's attributes and methods encapsulate the game's state and behavior, making it easy to reuse and extend the code.
+* title (CharField): The title of the post, limited to 200 characters.
+* slug (SlugField): A unique slug for the post URL, also limited to 200 characters.
+* author (ForeignKey to User model): The author of the post, linked to the Django User model.
+* featured_image (CloudinaryField): An image associated with the post, stored using Cloudinary.
+* excerpt (TextField): A brief excerpt or summary of the post content.
+* updated_on (DateTimeField): The date and time when the post was last updated.
+* content (TextField): The main content of the post.
+* created_on (DateTimeField): The date and time when the post was created.
+* status (IntegerField with choices): Indicates whether the post is a draft (0) or published (1).
+* likes (ManyToManyField to User model): Users who have liked the post.
 
-* Below it shows my Flow Chart for the Hangman Game
+Comment Model:
 
-![flow chart](docs/readme_images/flow_chart.jpeg)
+Fields:
 
-### Testing
+* post (ForeignKey to Post model): The post to which the comment is associated.
+* name (CharField): The name of the commenter.
+* email (EmailField): The email address of the commenter.
+* body (TextField): The content of the comment.
+* created_on (DateTimeField): The date and time when the comment was created.
+* approved (BooleanField): Indicates whether the comment is approved (True) or not (False).
+* deleted (BooleanField): Indicates whether the comment is deleted (True) or not (False).
+* User Model (from Django's built-in User model):
 
-I have manually tested this game by doing the following:
+Django's built-in User model is extended to include additional user-related information and fields, such as username, password, email, and more. It's used for user registration and authentication in your application.
 
-* I ran the game by running the script in my local terminal and the Code Institute Heroku terminal.
-* The game displayed a welcome message, rules of the game, and a hint to guess a fruit.
-* I was prompted to guess a letter.
-* I guessed a letter that was in the word.
-* The game displayed the updated word with the correct letters filled in and the number of guesses left.
-* I repeated steps 3-5 until I guessed the entire word or ran out of guesses.
-* If I guessed the entire word, the game displayed a congratulations message.
-* If I ran out of guesses, the game displayed a sorry message with the correct word.
-* I was prompted if I wanted to play again.
-* If I chose to play again, the game started over from the beginning with a new word to guess.
-* I repeated steps 3-10 until you were finished playing.
+This data model is designed to manage posts, comments, and user-related information in your Django project. Posts are associated with authors, have featured images stored in Cloudinary, and support post likes through a ManyToMany relationship with the User model. Comments are associated with specific posts, and user-related information is extended from Django's built-in User model for user registration and authentication.
+
+
+
+## Testing
+
+### Responsiveness
+
+All pages were tested to ensure responsiveness on screen sizes from 320px and upwards as defined in [WCAG 2.1 Reflow criteria for responsive design](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html) on Chrome, Edge, Firefox and Opera browsers.
+
+Steps to test:
+
+1. Open browser and navigate to [Swed News](https://swed-news-cf4db223443b.herokuapp.com/)
+2. Open the developer tools (right click and inspect)
+3. Set to responsive and decrease width to 320px
+4. Set the zoom to 50%
+5. Click and drag the responsive window to maximum width
+
+
+Website is responsive on all screen sizes and no images are pixelated or stretched.
+No horizontal scroll is present.
+No elements overlap.
+
+### Accessibility
+
+[Wave Accessibility](https://wave.webaim.org/) tool was used throughout development and for final testing of the deployed website to check for any aid accessibility testing.
+
+Testing was focused to ensure the following criteria were met:
+
+- All forms have associated labels or aria-labels so that this is read out on a screen reader to users who tab to form inputs
+- Color contrasts meet a minimum ratio as specified in [WCAG 2.1 Contrast Guidelines](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html)
+- Heading levels are not missed or skipped to ensure the importance of content is relayed correctly to the end user
+- All content is contained within landmarks to ensure ease of use for assistive technology, allowing the user to navigate by page regions
+- All not textual content had alternative text or titles so descriptions are read out to screen readers
+- HTML page lang attribute has been set
+- Aria properties have been implemented correctly
+- WCAG 2.1 Coding best practices being followed
+
+Manual tests were also performed to ensure the website was accessible as possible and an accessibility issue was identified.
+
+### I have manually tested the website:
+
+1. Functional Testing:
+
+a. Navigation Testing: Verify that all navigation links in the header and footer work correctly and take users to the intended pages. This includes testing links to the home page, login, registration, and individual post pages.
+
+b. User Registration: Test the user registration process by filling out the registration form with valid and invalid data. Ensure that users can successfully create accounts and are redirected to the appropriate pages.
+
+c. User Login and Logout: Test the login and logout functionality by entering valid and invalid credentials. Ensure users can log in and out successfully, and that they are redirected to the correct pages.
+
+d. Commenting: Check if users can submit comments on individual post pages. Verify that comments appear on the page after submission and that users can edit or delete their comments if applicable.
+
+e. Like Button: Test the "like" functionality on individual post pages. Ensure users can like and unlike posts, and that the like count updates accordingly.
+f. Post Creation: If applicable, test the creation of new posts from the admin panel. Verify that posts appear correctly on the home page.
+
+2.	Visual Testing:
+
+a. Layout and Design: Review the overall layout and design of the website. Check for consistency in fonts, colors, and spacing. Ensure that the website is visually appealing and easy to read.
+
+b. Responsive Design: Test the website on various screen sizes and devices (e.g., desktop, tablet, mobile). Verify that the website is responsive and that content is displayed correctly on all devices.
+
+c. Images and Media: Ensure that images and media elements (e.g., featured images) load properly and are displayed in the correct aspect ratio. Test with different types of images and verify that they are displayed without distortion.
+
+d. Forms and Input Fields: Verify that all forms and input fields have appropriate labels and placeholders. Check for validation messages and error handling when submitting forms with incorrect data.
+
+3.	Accessibility Testing:
+
+a. Keyboard Navigation: Test the website's accessibility using only the keyboard. Ensure that all interactive elements (links, buttons, forms) are accessible and can be activated using keyboard shortcuts.
+
+b. Screen Reader Compatibility: Use screen reader software to test the website's compatibility with assistive technologies. Ensure that all content is read aloud accurately and that images have appropriate alt text.
+
+4.	Performance Testing:
+
+a. Page Load Speed: Evaluate the website's performance in terms of page load speed. Tools like Google PageSpeed Insights can help identify areas for improvement.
+
+b. Content Loading: Check that content, especially images and videos, loads quickly and without delay. Optimize media files if necessary.
+
 
 I tested several situations:
 
-* I wrote number and I got error message as expected.
+* I keep the sign up form empty and I pressed perocced and it didn't go throug as expected.
 
-![number error](docs/testing/number_error.jpg)
+![user-empty](docs/testing/user-empty.jpg)
 
-* I wrote multiple letters and also I got error as expected.
+* I keep the password field empty and I pressed perocced and it didn't go throug as expected.
 
-![multiple letters error](docs/testing/multiple_letters_error.jpg)
+![password-empty](docs/testing/password-empty.jpg)
 
-* I wrote capital letter and got answer as expected.
+* I keept the password and user field empty and I pressed perocced and it didn't go throug as expected.
 
-![writting capital letter](docs/testing/writting_capital_letter.jpg)
+![username-password-incorrect](docs/testing/username-password-incorrect.jpg)
 
 
-Overall, I manually tested the game by playing it multiple times and verifying that it functioned correctly according to the rules and gameplay.
+Overall, I conducted manual testing on the website, focusing primarily on the registration and sign-in processes. During the testing phase, I carefully observed how the system behaved when a user attempted to register and sign in. I verified that error handling mechanisms were functioning as expected
 
 ### Bugs
 

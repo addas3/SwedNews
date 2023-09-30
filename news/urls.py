@@ -7,5 +7,5 @@ urlpatterns = [
     path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('delete-comment/<int:comment_id>/', views.CommentDelete.as_view(), name='delete_comment'),
     path('subscribe', views.subscribe, name='subscribe'),
-    
+  
 ]
